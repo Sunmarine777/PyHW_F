@@ -1,11 +1,11 @@
-from logger import input_data, print_data, change_data
+from logger import input_data, print_data, change_data, delete_data
 
 
 def interface():
-      print('Good day! You are in the bot mode \n 1 - enter data \n 2 - receive data \n 3 - change data')
+      print('Good day! You are in the bot mode \n 1 - enter data \n 2 - receive data \n 3 - change data \n 4 - delete data')
       command = int(input('Enter number: '))
       
-      while command != 1 and command != 2 and command != 3:
+      while command != 1 and command != 2 and command != 3 and command != 4:
             print('Wrong input')
             command = int(input('Enter  number: '))
 
@@ -15,8 +15,9 @@ def interface():
             print_data()
       elif command == 3:
             change_data()
+      elif command == 4:
+            delete_data()
 
 
 if  __name__ == '__main__':
       interface()
-

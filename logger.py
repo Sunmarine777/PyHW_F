@@ -13,7 +13,7 @@ def input_data():
       f"{name}\n{surname}\n{phone}\n{address}\n\n"
       f"Option 2: \n"
       f"{name};{surname};{phone};{address}\n"
-      f"Choose option: "))
+      f"Choose format: "))
 
       while var != 1 and var != 2:
             print("Wrong input")
@@ -34,79 +34,146 @@ def print_data():
       f"name\nsurname\nphone\naddress\nentry_number\n\n"
       f"Option 2: \n"
       f"name;surname;phone;address;entry_number\n"
-      f"Choose option: "))
+      f"Choose format: "))
       while var != 1 and var != 2:
             print("Wrong input")
             var = int(input('Input number: '))
       if var == 1:
-            with open('data1.csv', 'r', encoding='utf-8') as f:
-                  data_1 = f.readlines()
-            data_first = []
-            var1 = int(input(f"Input your entry number: "))
-            if var1*6 > len(data_1):
-                  print("Wrong input")
-            for i in range(1):
-                  data_first.append(''.join(data_1[var1*6-6:var1*6-1]))
-            print(''.join(data_first))
+            with open('data1.csv', 'r', encoding='utf-8') as f:   
+                  data_1 = f.read()
+            data_first = data_1.rstrip().split('\n\n')
+            var1 = input(f"Input your entry number: ")
+            for entry1 in data_first:
+                  entry_1 = entry1.split()
+                  if var1 in entry_1[4]:
+                        print(entry1)
+                  pass
 
       elif var == 2:
             with open('data2.csv', 'r', encoding='utf-8') as f:
-                  data_2 = f.readlines()
-            var2 = int(input(f"Input your entry number: "))
-            if var2*2-2 > len(data_2):
-                  print("Wrong input")
-            if var2 == 1:
-                  print(data_2[0])
-            for i in enumerate(data_2):                        
-                  if i == var2*2-2:
-                        break
+                  data_2 = f.read()
+            data_second = data_2.rstrip().split('\n\n')
+            var2 = input(f"Input your entry number: ")
+            for entry2 in data_second:
+                  entry_2 = entry2.split(';')
+                  if var2 in entry_2[4]:
+                        print(entry2)
                   pass
-            print(data_2[var2*2-2])
             
     
 def change_data():
-      var_c = str(input(f'Enter \'Y\' to change your entry:\n'))
-      while var_c != 'Y':
-            print("Wrong input")
-            var_c = int(input('Input number: '))
-      if var_c == 'Y':
-            var = int(input(f"What format of data were applied?\n"
-            f"Option 1: \n"
-            f"name\nsurname\nphone\naddress\nentry_number\n\n"
-            f"Option 2: \n"
-            f"name;surname;phone;address;entry_number\n"
-            f"Choose option: "))
+
+      var = int(input(f"What format of data were applied?\n"
+      f"Option 1: \n"
+      f"name\nsurname\nphone\naddress\nentry_number\n\n"
+      f"Option 2: \n"
+      f"name;surname;phone;address;entry_number\n"
+      f"Choose format: "))
       name = name_data()
       surname = surname_data()
       phone = phone_data()
       address = address_data()
-      rec_num1 = record_number1()
-      rec_num2 = record_number2()     
+     
       while var != 1 and var != 2:
             print("Wrong input")
             var = int(input('Input number: '))
       if var == 1:
             with open('data1.csv', 'r+', encoding='utf-8') as f:
-                  data_1 = f.readlines()
-            data_first = []
-            var1 = int(input(f"Input your entry number: "))
-            if var1*6 > len(data_1):
-                  print("Wrong input")
-            for i in range(1):
-                  data_first.append(''.join(data_1[var1*6-6:var1*6-1]))
+                  data_1 = f.read()
+            data_first = data_1.rstrip().split('\n\n')
+            var1 = input(f"Input your entry number: ")
+            for entry1 in data_first:
+                  entry_1 = entry1.split()
+                  if var1 in entry_1[4]:
+                        entry_c1 = entry1
+                  pass
+
+            with open('data1.csv', 'w+', encoding='utf-8') as f:
+                  for i in data_first:
+                        if i != entry_c1:
+                              f.write(f"{i}\n\n")
+                              pass
+                        elif i == entry_c1:
+                              f.write(f"{name}\n{surname}\n{phone}\n{address}\n{var1}\n\n")
+                              pass
+                        pass
+                  print('Entry updated')
 
       elif var == 2:
             with open('data2.csv', 'r+', encoding='utf-8') as f:
-                  data_2 = f.readlines()
-            var2 = int(input(f"Input your entry number: "))
-            if var2*2-2 > len(data_2):
-                  print("Wrong input")
-            if var2 == 1:
-                  with open('data2.csv', 'r+', encoding='utf-8') as f:
-                        f[0].write(f"{name};{surname};{phone};{address};{rec_num2}\n")
-                  print(*f[0])
+                  data_2 = f.read()
+            data_second = data_2.rstrip().split('\n\n')
+            var2 = input(f"Input your entry number: ")
+            for entry2 in data_second:
+                  entry_2 = entry2.split(';')
+                  if var2 in entry_2[4]:
+                        entry_c2 = entry2
+                  pass
+
+            with open('data2.csv', 'w+', encoding='utf-8') as f:
+                  for i in data_second:
+                        if i != entry_c2:
+                              f.write(f"{i}\n\n")
+                              pass
+                        elif i == entry_c2:
+                              f.write(f"{name};{surname};{phone};{address};{var2}\n\n")
+                              pass
+                        pass
+                  print('Entry updated')
+
+
+
+def delete_data():
+      var_c = str(input(f'Enter \'Y\' if you want to cancel your entry:\n'))
+      if var_c != 'Y':
+            print("Terminated")
+            exit()
+      elif var_c == 'Y':
+            var = int(input(f"What format of data were applied?\n"
+            f"Option 1: \n"
+            f"name\nsurname\nphone\naddress\nentry_number\n\n"
+            f"Option 2: \n"
+            f"name;surname;phone;address;entry_number\n"
+            f"Choose format: "))
+
+      while var != 1 and var != 2:
+            print("Wrong input")
+            var = int(input('Input number: '))
+      if var == 1:
+            with open('data1.csv', 'r+', encoding='utf-8') as f:
+                  data_1 = f.read()
+            data_first = data_1.rstrip().split('\n\n')
+            var1 = input(f"Input your entry number: ")
+            for entry1 in data_first:
+                  entry_1 = entry1.split()
+                  if var1 in entry_1[4]:
+                        entry_d1 = entry1
+                  pass
+            print(entry_d1)
+            with open('data1.csv', 'w+', encoding='utf-8') as f:
+                  for i in data_first:
+                        if i != entry_d1:
+                              f.write(f"{i}\n\n")
+                              pass
+                        pass
+            print('Deleted')
+
+      elif var == 2:
             with open('data2.csv', 'r+', encoding='utf-8') as f:
-                  f[var2*2-2].write(f"{name};{surname};{phone};{address};{rec_num2}\n")
-            print(*f[var2*2-2])
-
-
+                  data_2 = f.read()
+            data_second = data_2.rstrip().split('\n\n')
+            var2 = input(f"Input your entry number: ")
+            for entry2 in data_second:
+                  entry_2 = entry2.split(';')
+                  if var2 in entry_2[4]:
+                        entry_d2 = entry2 
+                  pass
+            print(entry_d2)
+            with open('data2.csv', 'w+', encoding='utf-8') as f:
+                  for i in data_second:
+                        if i != entry_d2:
+                              f.write(f"{i}\n\n")
+                              pass
+                        pass
+            print('Deleted')
+           

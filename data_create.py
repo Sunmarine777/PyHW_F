@@ -1,9 +1,9 @@
 def name_data():
-      name = input('Enter your name: ')
+      name = input('Enter your name: ').title()
       return name
 
 def surname_data():
-      surname = input('Enter your surname: ')
+      surname = input('Enter your surname: ').title()
       return surname
 
 def phone_data():
@@ -11,26 +11,21 @@ def phone_data():
       return phone
 
 def address_data():
-      address = input('Enter your address: ')
+      address = input('Enter your address: ').title()
       return address
 
 def record_number1():
       with open('data1.csv', 'r', encoding='utf-8') as f:   
-            count = int()    
-            for i in enumerate(f):
-                  if i != '\n':
-                        count += 1
-                  pass
-      countf = count//6                
-      return (countf+1)        
+            data_1 = f.read()
+            data1 = data_1.rstrip().split()
+            entry1 = data1[-1].rstrip().split()
+            entry_1 = int(entry1[-1])   
+      return(entry_1+1)    
 
 def record_number2():
       with open('data2.csv', 'r', encoding='utf-8') as f:   
-            count = int()    
-            for i in enumerate(f):
-                  if i != '\n':
-                        count += 1
-                  pass
-      countf = count//2                
-      return (countf+1)
-
+            data_2 = f.read()
+            data2 = data_2.rstrip().split()
+            entry2 = data2[-1].rstrip().split(';')
+            entry_2 = int(entry2[-1])   
+      return(entry_2+1)
