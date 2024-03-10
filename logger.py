@@ -45,7 +45,7 @@ def print_data():
             var1 = input(f"Input your entry number: ")
             for entry1 in data_first:
                   entry_1 = entry1.split()
-                  if var1 in entry_1[4]:
+                  if var1 in entry_1[-1]:
                         print(entry1)
                   pass
 
@@ -56,7 +56,7 @@ def print_data():
             var2 = input(f"Input your entry number: ")
             for entry2 in data_second:
                   entry_2 = entry2.split(';')
-                  if var2 in entry_2[4]:
+                  if var2 in entry_2[-1]:
                         print(entry2)
                   pass
             
@@ -84,7 +84,7 @@ def change_data():
             var1 = input(f"Input your entry number: ")
             for entry1 in data_first:
                   entry_1 = entry1.split()
-                  if var1 in entry_1[4]:
+                  if var1 in entry_1[-1]:
                         entry_c1 = entry1
                   pass
 
@@ -106,7 +106,7 @@ def change_data():
             var2 = input(f"Input your entry number: ")
             for entry2 in data_second:
                   entry_2 = entry2.split(';')
-                  if var2 in entry_2[4]:
+                  if var2 in entry_2[-1]:
                         entry_c2 = entry2
                   pass
 
@@ -146,7 +146,7 @@ def delete_data():
             var1 = input(f"Input your entry number: ")
             for entry1 in data_first:
                   entry_1 = entry1.split()
-                  if var1 in entry_1[4]:
+                  if var1 in entry_1[-1]:
                         entry_d1 = entry1
                   pass
             print(entry_d1)
@@ -165,7 +165,7 @@ def delete_data():
             var2 = input(f"Input your entry number: ")
             for entry2 in data_second:
                   entry_2 = entry2.split(';')
-                  if var2 in entry_2[4]:
+                  if var2 in entry_2[-1]:
                         entry_d2 = entry2 
                   pass
             print(entry_d2)
